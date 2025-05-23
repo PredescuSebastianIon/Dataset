@@ -1,9 +1,9 @@
-import pandas as pd
 import os
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 
+# Folder for saving figures
 FIGURES_DIR = "../figures"
 if not os.path.exists(FIGURES_DIR):
 	os.makedirs(FIGURES_DIR)
@@ -24,7 +24,7 @@ def statistics(df, name_of_subset):
 		figure, ax = plt.subplots()
 		sns.histplot(df[i], kde=True, ax=ax)
 		ax.set_title(f"{i} Distribution {name_of_subset}")
-		figure.savefigure(f"{FIGURES_DIR}/{name_of_subset}_{i}_hist.png", bbox_inches="tight")
+		figure.savefig(f"{FIGURES_DIR}/{name_of_subset}_{i}_hist.png", bbox_inches="tight")
 		plt.close(figure)
 
 	verdict_column = ["Verdict"]
@@ -32,7 +32,7 @@ def statistics(df, name_of_subset):
 		figure, ax = plt.subplots()
 		sns.countplot(x=i, data=df, ax=ax)
 		ax.set_title(f"{i} Counts {name_of_subset}")
-		figure.savefigure(f"{FIGURES_DIR}/{name_of_subset}_{i}_count.png", bbox_inches="tight")
+		figure.savefig(f"{FIGURES_DIR}/{name_of_subset}_{i}_count.png", bbox_inches="tight")
 		plt.close(figure)
 
 	# Outlier detection (boxplots)
@@ -40,7 +40,7 @@ def statistics(df, name_of_subset):
 		figure, ax = plt.subplots()
 		sns.boxplot(x=df[i], ax=ax)
 		ax.set_title(f"{i} Boxplot {name_of_subset}")
-		figure.savefigure(f"{FIGURES_DIR}/{name_of_subset}_{i}_box.png", bbox_inches="tight")
+		figure.savefig(f"{FIGURES_DIR}/{name_of_subset}_{i}_box.png", bbox_inches="tight")
 		plt.close(figure)
 
 	# Correlation matrix
@@ -49,7 +49,7 @@ def statistics(df, name_of_subset):
 	figure, ax = plt.subplots()
 	sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", ax=ax)
 	ax.set_title("Correlation Matrix {name_of_subset}")
-	figure.savefigure(f"{FIGURES_DIR}/{name_of_subset}_correlation_heatmap.png", bbox_inches="tight")
+	figure.savefig(f"{FIGURES_DIR}/{name_of_subset}_correlation_heatmap.png", bbox_inches="tight")
 	plt.close(figure)
 
 	# Relationship to target (violin plots)
@@ -57,15 +57,14 @@ def statistics(df, name_of_subset):
 		figure, ax = plt.subplots()
 		sns.violinplot(x="Verdict", y=i, data=df, inner="quartile", ax=ax)
 		ax.set_title(f"{i} by Verdict")
-		figure.savefigure(f"{FIGURES_DIR}/{name_of_subset}_{i}_violin.png", bbox_inches="tight")
+		figure.savefig(f"{FIGURES_DIR}/{name_of_subset}_{i}_violin.png", bbox_inches="tight")
 		plt.close(figure)
-
 
 # Load data and process it
 def load_data(train_df, test_df):
 	# Missing values
 	missing_value_report(train_df, "Train")
-	missing_value_report(test_df,  "Test")
+	missing_value_report(test_df, "Test")
 
 	# Descriptive statistics
 	print("\n----------- Train.describe() -----------")
