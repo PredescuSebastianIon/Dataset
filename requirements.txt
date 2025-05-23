@@ -1,3 +1,6 @@
 pandas
 gradio
 scikit-learn
+matplotlib
+seaborn
+numpy

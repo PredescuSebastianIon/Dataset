@@ -1,9 +1,12 @@
 import pandas as pd
 import gradio as gr
 from sklearn.model_selection import train_test_split
+from preprocess import preprocess
+from processDataSet import load_data
 
 def load_and_split_data():
-	df = pd.read_csv("../data/diabetes.csv")
+	df = pd.read_csv("../data/original_diabetes.csv")
+	df = preprocess(df)
 	train_df, test_df = train_test_split(
 		df,
 		test_size = 0.2,
@@ -12,6 +15,7 @@ def load_and_split_data():
 	)
 	train_df.to_csv("../data/train.csv", index = False)
 	test_df.to_csv("../data/test.csv", index = True)
+	load_data(train_df, test_df)
 	return train_df, test_df
 
 interface = gr.Interface(
@@ -26,4 +30,4 @@ interface = gr.Interface(
 				"2 subsets, one for training and the other for testing"
 )
 
-interface.launch()
+interface.launch(share = True)

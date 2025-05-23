@@ -1,6 +1,8 @@
 import pandas as pd
 
-original = pd.read_csv("../data/original_diabetes.csv")
-original["Verdict"] = (original["Outcome"] == 1)
-original = original.drop(columns = ["Outcome"])
-original.to_csv("../data/diabetes.csv", index = False)
+def preprocess(original):
+	modified = original.copy()
+	modified["Verdict"] = (modified["Outcome"] == 1)
+	modified = modified.drop(columns = ["Outcome"])
+	modified.to_csv("../data/diabetes.csv", index = False)
+	return modified

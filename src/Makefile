@@ -1,15 +1,11 @@
 PYTHON := python3
-SRCS := main.py preprocess.py
+SRCS := main.py
 
-.PHONY: all preprocess run force rerun
+.PHONY: all run force rerun
 
-all: preprocess run
+all: run
 
-preprocess:
-	@echo "Proprocessing the dataset"
-	$(PYTHON) preprocess.py
-
-run: preprocess
+run:
 	@echo "Starting server"
 	$(PYTHON) main.py
 
@@ -18,3 +14,10 @@ force:
 rerun: force
 	@echo "Rerunning"
 	$(MAKE) run
+
+clean:
+	@echo "→ Cleaning up…"
+	rm -rf __pycache__ */__pycache__ *.pyc */*.pyc
+	rm -rf .venv
+	rm -f ../data/train.csv ../data/test.csv ../data/diabetes.csv
+	rm -rf ../figures
