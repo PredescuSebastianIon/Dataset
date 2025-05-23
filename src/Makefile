@@ -1,6 +1,20 @@
 PYTHON := python3
-SRCS := main.py
+SRCS := main.py preprocess.py
 
-.PHONY: all run
+.PHONY: all preprocess run force rerun
 
-all: $()
+all: preprocess run
+
+preprocess:
+	@echo "Proprocessing the dataset"
+	$(PYTHON) preprocess.py
+
+run: preprocess
+	@echo "Starting server"
+	$(PYTHON) main.py
+
+force:
+
+rerun: force
+	@echo "Rerunning"
+	$(MAKE) run
