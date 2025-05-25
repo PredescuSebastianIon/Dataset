@@ -17,6 +17,8 @@ The implementation in described in README.pdf.
 
 1. You need to install `python3` on your local machine.
 2. Clone repository link that you can find in the last section of `README.pdf`.
+	- You just need to click on `here` word from that section and it's going to 
+	  take you directly to the repository.
 3. I highly recommand using a python virtual enviroment.
 
 ```python

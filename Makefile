@@ -1,8 +1,8 @@
 .PHONY: all venv install activate run clean
 
 VENV := .venv
-PIP := $(VENV)/bin/pip
-PYTHON := $(VENV)/bin/python
+PIP := pip
+PYTHON := python3
 
 all: activate install run
 
